@@ -17,11 +17,12 @@ return  {
                     ['ui-select'] = {
                         require('telescope.themes').get_dropdown({}),
                     },
-                    ['undo'] = {
-                        
-                    }                    
+                    ['undo'] = {},           
                 },
            })
+
+            telescope.load_extension('ui-select')
+            telescope.load_extension('undo')
 
             -- See `:help telescope.builtin`
             local builtin = require('telescope.builtin')
@@ -48,11 +49,8 @@ return  {
               }
             end, { desc = '[S]earch [/] in Open Files' })
 
-
             vim.keymap.set('n', '<leader>u', '<cmd>Telescope undo<cr>', { desc = 'Telescope undo history'})
 
-            telescope.load_extension('ui-select')
-            telescope.load_extension('undo')
         end
     },
 }
