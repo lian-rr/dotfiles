@@ -1,11 +1,11 @@
-return  {
+return {
     {
         'nvim-telescope/telescope-ui-select.nvim',
     },
     {
-        'nvim-telescope/telescope.nvim', 
+        'nvim-telescope/telescope.nvim',
         tag = '0.1.5',
-        dependencies = { 
+        dependencies = {
             'nvim-lua/plenary.nvim',
             "debugloop/telescope-undo.nvim",
         },
@@ -17,9 +17,9 @@ return  {
                     ['ui-select'] = {
                         require('telescope.themes').get_dropdown({}),
                     },
-                    ['undo'] = {},           
+                    ['undo'] = {},
                 },
-           })
+            })
 
             telescope.load_extension('ui-select')
             telescope.load_extension('undo')
@@ -35,22 +35,21 @@ return  {
 
 
             vim.keymap.set('n', '<leader>/', function()
-              -- You can pass additional configuration to telescope to change theme, layout, etc.
-              builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-                winblend = 10,
-                previewer = false,
-              })
-            end, { desc = '[/] Fuzzily search in current buffer' })
+                -- You can pass additional configuration to telescope to change theme, layout, etc.
+                builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+                    winblend = 10,
+                    previewer = false,
+                })
+            end, { desc = 'Fuzzily search in current buffer' })
 
             vim.keymap.set('n', '<leader>s/', function()
-              builtin.live_grep {
-                grep_open_files = true,
-                prompt_title = 'Live Grep in Open Files',
-              }
-            end, { desc = '[S]earch [/] in Open Files' })
+                builtin.live_grep {
+                    grep_open_files = true,
+                    prompt_title = 'Live Grep in Open Files',
+                }
+            end, { desc = 'Search in Open Files' })
 
-            vim.keymap.set('n', '<leader>u', '<cmd>Telescope undo<cr>', { desc = 'Telescope undo history'})
-
+            vim.keymap.set('n', '<leader>u', '<cmd>Telescope undo<cr>', { desc = 'Telescope undo history' })
         end
     },
 }
