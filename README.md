@@ -9,4 +9,5 @@
 stow nvim
 stow alacritty
 stow tmux
+stow starship
 ```
