@@ -8,4 +8,5 @@
 ```shell
 stow nvim
 stow alacritty
+stow tmux
 ```
