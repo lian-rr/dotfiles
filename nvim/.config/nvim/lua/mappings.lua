@@ -30,10 +30,10 @@ vim.keymap.set("n", "<C-s>", "<cmd> w <CR>", { desc = "Save file" })
 vim.keymap.set("n", "<C-S>", "<cmd> wa <CR>", { desc = "Save all files" })
 
 -- Switching between windows
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Window left" })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Window right" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Window up" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Window down" })
+-- vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Window left" })
+-- vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Window right" })
+-- vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Window up" })
+-- vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Window down" })
 
 -- Remap for dealing with word wrap
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
