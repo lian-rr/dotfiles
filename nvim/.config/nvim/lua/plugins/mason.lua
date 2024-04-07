@@ -37,9 +37,20 @@ return {
                 },
             })
 
-            -- require("mason-tool-installer").setup({
-            -- 	ensure_installed = {},
-            -- })
+            require("mason-tool-installer").setup({
+                ensure_installed = {
+                    "stylua",
+                    "delve", -- go debugger
+                    "golangci-lint", -- go linter
+                    "gofumpt", -- go formatter
+                    "goimports-reviser", -- go auto imports
+                    "golines", -- go format long lines
+                    "shellcheck",
+                    "misspell",
+                    "gomodifytags", -- generate tags for structs
+                    "impl", -- gen methods for implementing interface
+                },
+            })
         end,
     },
     {
