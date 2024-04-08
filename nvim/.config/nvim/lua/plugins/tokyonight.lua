@@ -1,9 +1,12 @@
 return {
-	'folke/tokyonight.nvim',
+    "folke/tokyonight.nvim",
     lazy = false,
-	priority = 1000,
-	opts = {},
+    priority = 1000,
+    opts = {},
     config = function()
-       vim.cmd.colorscheme 'tokyonight'
-    end
+        require("tokyonight").setup({
+            style = "moon",
+        })
+        vim.cmd("colorscheme tokyonight")
+    end,
 }
