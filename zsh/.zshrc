@@ -38,17 +38,25 @@ _fzf_compgen_dir() {
 }
 
 # ----- Bat (better cat) -----
-export BAT_THEME=tokyonight_night
-alias cat="bat"
+if type "bat" > /dev/null; then
+    export BAT_THEME=tokyonight_night
+    alias cat="bat"
+fi
 
 # ----- Abbr Expansion -------
 ABBR_SET_EXPANSION_CURSOR=1
 
+if [ -f ~/.abbrs ]; then
+    source ~/.abbrs
+fi
+
+# ------ Aliases --------
+alias vim="nvim"
+alias zshconfig="vim ~/.zshrc"
+alias zshrestart="source ~/.zshrc"
+
 # ------ Other exports --------
 export PATH="$PATH:$(go env GOPATH)/bin"
-
-# ------ Overrides ----------
-alias vim="nvim"
 
 # Start starship shell
 eval "$(starship init zsh)"
