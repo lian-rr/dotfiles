@@ -12,3 +12,4 @@ if type "eza" > /dev/null; then
 else
     abbr add --force --quiet l="ls -laH"
 fi
+
