@@ -96,8 +96,13 @@ fi
 # ----- Abbr Expansion -------
 ABBR_SET_EXPANSION_CURSOR=1
 
-if [ -f ~/.abbrs ]; then
-    source ~/.abbrs
+if [ -f ~/.config/zsh/.abbrs ]; then
+    source ~/.config/zsh/.abbrs 
+fi
+
+# ---- Local config
+if [ -f ~/.config/zsh/.local ]; then
+    source ~/.config/zsh/.local 
 fi
 
 # ------ Aliases --------
