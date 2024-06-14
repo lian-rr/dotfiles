@@ -61,16 +61,16 @@ return {
                     { desc = "Go to type definition" }
                 )
 
-                vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename" })
-                vim.keymap.set("n", "<space>cf", function()
+                vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename", silent = true })
+                vim.keymap.set("n", "<space>fm", function()
                     vim.lsp.buf.format({ async = true })
-                end, { desc = "Auto format", buffer = ev.buf })
+                end, { desc = "Auto format", buffer = ev.buf, silent = true })
 
                 vim.keymap.set(
                     "n",
                     "<leader>gD",
                     "<cmd>Telescope diagnostics bufnr=0<CR>",
-                    { desc = "Show buffer diagnostics" }
+                    { desc = "Show buffer diagnostics", silent = true }
                 )
             end,
         })

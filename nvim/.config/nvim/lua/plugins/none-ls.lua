@@ -1,5 +1,6 @@
 return {
     "nvimtools/none-ls.nvim",
+    event = "VeryLazy",
     config = function()
         local null_ls = require("null-ls")
 
@@ -7,10 +8,17 @@ return {
 
         null_ls.setup({
             sources = {
+                -- Lua
                 null_ls.builtins.formatting.stylua,
+
+                -- Spellcheck
                 null_ls.builtins.completion.spell,
+
+                -- Golang
                 null_ls.builtins.formatting.gofumpt,
                 null_ls.builtins.formatting.goimports_reviser,
+                -- C/C++
+                null_ls.builtins.formatting.clang_format,
             },
             on_attach = function(client, bufnr)
                 if client.supports_method("textDocument/formatting") then

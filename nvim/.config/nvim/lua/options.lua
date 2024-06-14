@@ -30,7 +30,7 @@ vim.opt.signcolumn = "yes"
 -- (have to use iterm2 or any other true color terminal)
 vim.opt.termguicolors = true
 vim.opt.background = "dark" -- colorschemes that can be light or dark will be made dark
-vim.opt.signcolumn = "yes" -- show sign column so that text doesn't shift
+vim.opt.signcolumn = "yes"  -- show sign column so that text doesn't shift
 
 vim.opt.cursorline = true
 
@@ -58,3 +58,7 @@ vim.opt.swapfile = false
 
 -- backspace
 vim.opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
+
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.cindent = true

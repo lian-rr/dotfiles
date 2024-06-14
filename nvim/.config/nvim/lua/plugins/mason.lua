@@ -50,6 +50,7 @@ return {
                     "misspell",
                     "gomodifytags", -- generate tags for structs
                     "impl", -- gen methods for implementing interface
+                    "clang-format",
                 },
             })
         end,
