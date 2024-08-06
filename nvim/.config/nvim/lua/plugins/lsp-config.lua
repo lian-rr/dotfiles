@@ -26,6 +26,12 @@ return {
 
             -- C/C++
             lspconfig.clangd.setup(require("plugins.lsp-configs.clangd")),
+
+            -- JS/TS
+            lspconfig.tsserver.setup({}),
+
+            -- ZIG
+            lspconfig.zls.setup(require("plugins.lsp-configs.zls")),
         })
 
         -- Global mappings.

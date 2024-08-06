@@ -17,6 +17,7 @@ return {
                 -- Golang
                 null_ls.builtins.formatting.gofumpt,
                 null_ls.builtins.formatting.goimports_reviser,
+                null_ls.builtins.diagnostics.golanci_lint,
                 -- C/C++
                 null_ls.builtins.formatting.clang_format,
             },

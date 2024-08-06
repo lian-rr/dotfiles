@@ -10,6 +10,10 @@ return {
                     "lua",
                     "go",
                     "sql",
+                    "tsx",
+                    "javascript",
+                    "typescript",
+                    "zig",
                 },
                 auto_install = true,
                 highlight = {
