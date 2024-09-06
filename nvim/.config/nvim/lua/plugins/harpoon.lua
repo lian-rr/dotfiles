@@ -7,8 +7,7 @@ return {
     },
     config = function()
         local harpoon = require("harpoon")
-
-        harpoon.setup({})
+        harpoon:setup({})
 
         -- Add mark
         vim.keymap.set("n", "<leader>ha", function()
@@ -16,12 +15,9 @@ return {
         end, { desc = "Harpoon add file" })
 
         -- Quick menu
-        vim.keymap.set("n", "<leader>hm", function()
+        vim.keymap.set("n", "<leader>ht", function()
             harpoon.ui:toggle_quick_menu(harpoon:list())
         end, { desc = "Harpoon quick menu" })
-
-        -- Full menu
-        vim.keymap.set("n", "<leader><C-m>", ":Telescope harpoon marks<CR>", { desc = "Harpoon menu" })
 
         -- Next and previous
         vim.keymap.set("n", "<leader>hn", function()
@@ -39,11 +35,35 @@ return {
         vim.keymap.set("n", "<leader>hd", function()
             harpoon:list():select(2)
         end, { desc = "Harpoon mark 2" })
-        vim.keymap.set("n", "<leader>hs", function()
+        vim.keymap.set("n", "<leader>hj", function()
             harpoon:list():select(3)
         end, { desc = "Harpoon mark 3" })
-        vim.keymap.set("n", "<leader>ha", function()
+        vim.keymap.set("n", "<leader>hk", function()
             harpoon:list():select(4)
         end, { desc = "Harpoon mark 4" })
+
+        -- basic telescope configuration
+        local conf = require("telescope.config").values
+        local function toggle_telescope(harpoon_files)
+            local file_paths = {}
+            for _, item in ipairs(harpoon_files.items) do
+                table.insert(file_paths, item.value)
+            end
+
+            require("telescope.pickers")
+                .new({}, {
+                    prompt_title = "Harpoon",
+                    finder = require("telescope.finders").new_table({
+                        results = file_paths,
+                    }),
+                    previewer = conf.file_previewer({}),
+                    sorter = conf.generic_sorter({}),
+                })
+                :find()
+        end
+
+        vim.keymap.set("n", "<C-e>", function()
+            toggle_telescope(harpoon:list())
+        end, { desc = "Open harpoon window" })
     end,
 }
