@@ -118,6 +118,7 @@ export PATH="$PATH:$(go env GOPATH)/bin"
 export PATH=$PATH:$GOPATH/bin
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$(brew --prefix)/opt/libpq/bin"
+export PATH="$PATH:$HOME/.zig"
 
 # Start starship shell
 eval "$(starship init zsh)"
