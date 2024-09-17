@@ -98,8 +98,11 @@ save_to_clipboard = true
 semantic_escape_chars = ",│`|:\"' ()[]{}<>"
 
 [window]
-opacity = 0.9
+opacity = 0.85
+decorations = "Buttonless"
+dynamic_padding = true
+startup_mode = "Maximized"
 
 [window.padding]
-x = 2
+x = 5
 y = 2
