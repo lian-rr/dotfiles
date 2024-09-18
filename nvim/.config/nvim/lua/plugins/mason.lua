@@ -35,7 +35,6 @@ return {
                     "lua_ls",
                     "gopls",
                     "clangd",
-                    "tsserver",
                     "zls",
                 },
             })

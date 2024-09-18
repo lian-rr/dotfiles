@@ -15,6 +15,16 @@ return {
                 unusedwrite = true,
                 useany = true,
             },
+            hints = {
+                enable = true,
+                -- assignVariableTypes = true,
+                -- compositeLiteralFields = true,
+                -- compositeLiteralTypes = true,
+                -- constantValues = true,
+                -- functionTypeParameters = true,
+                -- parameterNames = true,
+                -- rangeVariableTypes = true,
+            },
         },
     },
 }
