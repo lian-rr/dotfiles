@@ -122,3 +122,7 @@ export PATH="$PATH:$HOME/.zig"
 
 # Start starship shell
 eval "$(starship init zsh)"
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"

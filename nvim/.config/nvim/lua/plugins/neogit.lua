@@ -10,7 +10,6 @@ return {
         neogit.setup({})
 
         vim.keymap.set("n", "<leader>gs", neogit.open, { desc = "Git status", silent = true })
-        vim.keymap.set("n", "<leader>gc", ":Neogit commit<CR>", { desc = "Git commit", silent = true })
         vim.keymap.set("n", "<leader>gp", ":Neogit pull<CR>", { desc = "Git pull", silent = true })
         vim.keymap.set("n", "<leader>gP", ":Neogit push<CR>", { desc = "Git push", silent = true })
         vim.keymap.set("n", "<leader>gb", ":Telescope git_branches<CR>", { desc = "Git branches", silent = true })
