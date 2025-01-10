@@ -24,4 +24,6 @@ stow alacritty
 stow tmux
 stow starship
 stow bat
+stow ghostty
+stow aerospace
 ```

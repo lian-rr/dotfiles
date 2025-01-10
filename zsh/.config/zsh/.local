@@ -5,4 +5,3 @@ abbr add --force --quiet idf="idf.py"
 
 # -- aliases
 alias idfconf=". /Users/lianrodriguez/Documents/Projects/others/esp-idf/export.sh"
-
