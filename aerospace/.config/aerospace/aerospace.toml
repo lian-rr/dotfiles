@@ -167,9 +167,9 @@ ctrl-alt-m = 'fullscreen'
 alt-shift-semicolon = 'mode service'
 
 # App launcher
-alt-a = 'exec-and-forget open -a /Applications/Arc.app'
-alt-t = 'exec-and-forget open -a /Applications/Ghostty.app'
-alt-s = 'exec-and-forget open -a /Applications/Safari.app'
+ctrl-cmd-shift-a = 'exec-and-forget open -a /Applications/Arc.app'
+ctrl-cmd-shift-t = 'exec-and-forget open -a /Applications/Ghostty.app'
+ctrl-cmd-shift-s = 'exec-and-forget open -a /Applications/Safari.app'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
