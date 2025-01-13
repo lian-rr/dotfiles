@@ -126,3 +126,5 @@ eval "$(starship init zsh)"
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh)"
+
+. "$HOME/.clio/bin/env"

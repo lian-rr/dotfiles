@@ -36,6 +36,7 @@ return {
                     "gopls",
                     "clangd",
                     "zls",
+                    "nil_ls",
                 },
             })
 

@@ -32,6 +32,9 @@ return {
 
             -- ZIG
             lspconfig.zls.setup(require("plugins.lsp-configs.zls")),
+
+            -- Nix
+            lspconfig.nil_ls.setup(require("plugins.lsp-configs.nix")),
         })
 
         -- Global mappings.
