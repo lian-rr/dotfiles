@@ -35,6 +35,9 @@ return {
 
             -- Nix
             lspconfig.nil_ls.setup(require("plugins.lsp-configs.nix")),
+
+            -- Buf config
+            -- lspconfig.gopls.setup(require("plugins.lsp-configs.buf_ls")),
         })
 
         -- Global mappings.

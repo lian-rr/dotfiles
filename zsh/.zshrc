@@ -1,6 +1,7 @@
 export PATH=$PATH:/opt/homebrew/bin
 export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="/opt/homebrew/opt/libtool/libexec/gnubin:$PATH"
+export PATH=$(brew --prefix openssh)/bin:$PATH
 
 source $(brew --prefix)/share/zsh-abbr/zsh-abbr.zsh
 
@@ -105,9 +106,14 @@ if [ -f ~/.config/zsh/.local ]; then
     source ~/.config/zsh/.local 
 fi
 
+# kubectl completions
+source <(kubectl completion zsh)
+# buf completions
+source <(buf completion zsh)
+
 # ------ Aliases --------
-alias vim="nvim"
-alias zshconfig="vim ~/.zshrc"
+alias v="nvim"
+alias zshconfig="v ~/.zshrc"
 alias zshrestart="source ~/.zshrc"
 
 eval $(thefuck --alias)
@@ -128,3 +134,5 @@ eval "$(starship init zsh)"
 eval "$(atuin init zsh)"
 
 . "$HOME/.clio/bin/env"
+
+eval "$(direnv hook zsh)"

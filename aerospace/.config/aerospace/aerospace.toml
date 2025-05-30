@@ -16,7 +16,7 @@ after-startup-command = [
 ]
 
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -61,7 +61,12 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.riotgames.RiotGames.RiotClient'
-run = 'layout floating'
+run = ['layout floating', 'move-node-to-workspace 0']
+
+[[on-window-detected]]
+if.app-id = 'com.riotgames.LeagueofLegends.LeagueClientUx'
+run = ['layout floating', 'move-node-to-workspace 0']
+
 
 [[on-window-detected]]
 if.app-id = 'com.callpod.keepermac.lite'
@@ -69,8 +74,15 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = ['layout tiling', 'move-node-to-workspace 2']
+run = ['layout tiling', 'move-node-to-workspace 6']
 
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = ['layout tiling', 'move-node-to-workspace T']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.FaceTime'
+run = 'layout floating'
 # Possible values: (qwerty|dvorak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
@@ -152,6 +164,7 @@ alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
 alt-0 = 'workspace 0'
+alt-t = 'workspace T'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
@@ -164,6 +177,7 @@ alt-shift-7 = 'move-node-to-workspace 7 --focus-follows-window'
 alt-shift-8 = 'move-node-to-workspace 8 --focus-follows-window'
 alt-shift-9 = 'move-node-to-workspace 9 --focus-follows-window'
 alt-shift-0 = 'move-node-to-workspace 0 --focus-follows-window'
+alt-shift-t = 'move-node-to-workspace T --focus-follows-window'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
