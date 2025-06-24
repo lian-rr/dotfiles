@@ -30,16 +30,6 @@ return {
                 max_concurrent_installers = 10,
             })
 
-            require("mason-lspconfig").setup({
-                ensure_installed = {
-                    "lua_ls",
-                    "gopls",
-                    "clangd",
-                    "zls",
-                    "nil_ls",
-                },
-            })
-
             require("mason-tool-installer").setup({
                 ensure_installed = {
                     "stylua",

@@ -8,7 +8,13 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "debugloop/telescope-undo.nvim",
-            { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                build = "make",
+                config = function()
+                    require("telescope").load_extension("fzf")
+                end,
+            },
             "folke/todo-comments.nvim",
         },
         config = function()
@@ -90,8 +96,8 @@ return {
             -- See `:help telescope.builtin`
             local builtin = require("telescope.builtin")
 
-            vim.keymap.set("n", "<leader>ff", builtin.buffers, { desc = "Find existing buffers" })
-            vim.keymap.set("n", "<leader>fa", builtin.find_files, { desc = "Find in all files" })
+            vim.keymap.set("n", "<leader><space>", builtin.buffers, { desc = "Find existing buffers" })
+            vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find in all files" })
             vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Find recently opened files" })
             vim.keymap.set("n", "<leader>fg", builtin.git_files, { desc = "Search Git Files" })
             vim.keymap.set("n", "<leader>fs", builtin.live_grep, { desc = "Find string in cwd" })

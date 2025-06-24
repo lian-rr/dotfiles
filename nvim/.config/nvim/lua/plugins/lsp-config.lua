@@ -8,37 +8,37 @@ return {
         { "folke/neodev.nvim",                   opts = {} },
     },
     config = function()
-        local lspconfig = require("lspconfig")
-
-        local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
         -- import mason_lspconfig plugin
         local mason_lspconfig = require("mason-lspconfig")
 
-        mason_lspconfig.setup_handlers({
-            -- Lua config
-            lspconfig.lua_ls.setup({
-                capabilities = capabilities,
-            }),
-
-            -- Go config
-            lspconfig.gopls.setup(require("plugins.lsp-configs.gopls")),
-
-            -- C/C++
-            lspconfig.clangd.setup(require("plugins.lsp-configs.clangd")),
-
-            -- JS/TS
-            -- lspconfig.tsserver.setup({}),
-
-            -- ZIG
-            lspconfig.zls.setup(require("plugins.lsp-configs.zls")),
-
-            -- Nix
-            lspconfig.nil_ls.setup(require("plugins.lsp-configs.nix")),
-
-            -- Buf config
-            -- lspconfig.gopls.setup(require("plugins.lsp-configs.buf_ls")),
+        mason_lspconfig.setup({
+            ensure_installed = {
+                "lua_ls",
+                "gopls",
+                "clangd",
+                "zls",
+                "nil_ls",
+                "buf_ls",
+                "ts_ls",
+            },
         })
+
+        -- Lua config
+        vim.lsp.config("lua_ls", require("plugins.lsp-configs.lua_ls"))
+        -- Go config
+        vim.lsp.config("gopls", require("plugins.lsp-configs.gopls"))
+
+        -- C/C++
+        vim.lsp.config("clangd", require("plugins.lsp-configs.clangd"))
+
+        -- JS/TS
+        vim.lsp.config("ts_ls", require("plugins.lsp-configs.ts_ls"))
+
+        -- ZIG
+        vim.lsp.config("zls", require("plugins.lsp-configs.zls"))
+
+        -- Nix
+        vim.lsp.config("nil_ls", require("plugins.lsp-configs.nil_ls"))
 
         -- Global mappings.
         -- See `:help vim.diagnostic.*` for documentation on any of the below functions
