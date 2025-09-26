@@ -7,38 +7,22 @@ return {
         { "antosha417/nvim-lsp-file-operations", config = true },
         { "folke/neodev.nvim",                   opts = {} },
     },
+
     config = function()
-        -- import mason_lspconfig plugin
-        local mason_lspconfig = require("mason-lspconfig")
+        -- LSP Servers
+        local servers = {
+            "lua_ls", -- Lua
+            "gopls", -- Go
+            "clangd", -- C/C++
+            "ts_ls", -- JS/TS
+            "tailwindcss", -- Tailwind
+            "zls", -- Zig
+            "nil_ls", --Nix
+        }
 
-        mason_lspconfig.setup({
-            ensure_installed = {
-                "lua_ls",
-                "gopls",
-                "clangd",
-                "zls",
-                "nil_ls",
-                "buf_ls",
-                "ts_ls",
-            },
-        })
-
-        -- Lua config
-        vim.lsp.config("lua_ls", require("plugins.lsp-configs.lua_ls"))
-        -- Go config
-        vim.lsp.config("gopls", require("plugins.lsp-configs.gopls"))
-
-        -- C/C++
-        vim.lsp.config("clangd", require("plugins.lsp-configs.clangd"))
-
-        -- JS/TS
-        vim.lsp.config("ts_ls", require("plugins.lsp-configs.ts_ls"))
-
-        -- ZIG
-        vim.lsp.config("zls", require("plugins.lsp-configs.zls"))
-
-        -- Nix
-        vim.lsp.config("nil_ls", require("plugins.lsp-configs.nil_ls"))
+        for _, server in ipairs(servers) do
+            vim.lsp.config(server, require(string.format("plugins.lsp-configs.%s", server)))
+        end
 
         -- Global mappings.
         -- See `:help vim.diagnostic.*` for documentation on any of the below functions

@@ -18,8 +18,12 @@ return {
                 null_ls.builtins.formatting.gofumpt,
                 null_ls.builtins.formatting.goimports_reviser,
                 null_ls.builtins.diagnostics.golangci_lint,
+
                 -- C/C++
                 null_ls.builtins.formatting.clang_format,
+
+                --Prettier
+                null_ls.builtins.formatting.prettierd,
             },
             on_attach = function(client, bufnr)
                 if client.supports_method("textDocument/formatting") then

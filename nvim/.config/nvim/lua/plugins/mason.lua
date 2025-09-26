@@ -30,6 +30,23 @@ return {
                 max_concurrent_installers = 10,
             })
 
+            -- import mason_lspconfig plugin
+            local mason_lspconfig = require("mason-lspconfig")
+
+            mason_lspconfig.setup({
+                ensure_installed = {
+                    "lua_ls",
+                    "gopls",
+                    "clangd",
+                    "zls",
+                    "nil_ls",
+                    "buf_ls",
+                    "ts_ls",
+                    "tailwindcss",
+                    "prettierd",
+                },
+            })
+
             require("mason-tool-installer").setup({
                 ensure_installed = {
                     "stylua",
