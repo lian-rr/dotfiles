@@ -43,7 +43,6 @@ return {
                     "buf_ls",
                     "ts_ls",
                     "tailwindcss",
-                    "prettierd",
                 },
             })
 
@@ -60,6 +59,7 @@ return {
                     "gomodifytags", -- generate tags for structs
                     "impl", -- gen methods for implementing interface
                     "clang-format",
+                    "prettierd",
                 },
             })
         end,
