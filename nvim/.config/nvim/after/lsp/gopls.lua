@@ -1,9 +1,6 @@
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 return {
 	cmd = { "gopls" },
 	filetypes = { "go", "gomod", "gowork", "gotmpl" },
-	capabilities = capabilities,
 	settings = {
 		gopls = {
 			semanticTokens = true,

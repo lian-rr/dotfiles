@@ -25,7 +25,7 @@ return {
 		}
 
 		for _, server in ipairs(servers) do
-			vim.lsp.config(server, require(string.format("plugins.lsp-configs.%s", server)))
+			vim.lsp.enable(server)
 		end
 
 		-- Global mappings.
