@@ -1,9 +1,15 @@
-export PATH=$PATH:/opt/homebrew/bin
-export PATH="/opt/homebrew/sbin:$PATH"
-export PATH="/opt/homebrew/opt/libtool/libexec/gnubin:$PATH"
-export PATH=$(brew --prefix openssh)/bin:$PATH
+# zmodload zsh/zprof # uncomment for debugging startup
 
-source $(brew --prefix)/share/zsh-abbr/zsh-abbr.zsh
+# Cache brew prefix to avoid multiple slow calls
+if [[ -z "$HOMEBREW_PREFIX" ]]; then
+  export HOMEBREW_PREFIX="/opt/homebrew"  # Hardcode it! It never changes
+fi
+
+export PATH=$PATH:$HOMEBREW_PREFIX/bin
+export PATH="$HOMEBREW_PREFIX/sbin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/libtool/libexec/gnubin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/openssh/bin:$PATH"
+export PATH="$PATH:$HOMEBREW_PREFIX/opt/libpq/bin"
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -17,23 +23,65 @@ fi
 # Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
+# Smart compinit with daily cache refresh
+autoload -Uz compinit
+typeset -g compfile="${ZDOTDIR:-$HOME}/.zcompdump"
+
+if [[ -n "$compfile"(#qN.mh+24) ]]; then
+  # Regenerate once per day
+  compinit -i -d "$compfile"
+else
+  # Use cache, skip all checks
+  compinit -C -d "$compfile"
+fi
+
+# Add in zsh plugins with proper wait timing
+zinit ice wait'0a' lucid atinit'zicompinit; zicdreplay'
+zinit light zdharma-continuum/fast-syntax-highlighting
+
+zinit ice wait'0b' lucid atload'_zsh_autosuggest_start'
 zinit light zsh-users/zsh-autosuggestions
+
+zinit ice wait'0c' lucid blockf
+zinit light zsh-users/zsh-completions
+
+zinit ice wait'1' lucid
 zinit light Aloxaf/fzf-tab
 
-# Add in snippets
+zinit ice wait'2' lucid src:"$HOMEBREW_PREFIX/share/zsh-abbr/zsh-abbr.zsh"
+zinit light zdharma-continuum/null
+
+# Add in snippets with staggered loading
+zinit ice wait'0' lucid
 zinit snippet OMZP::git
+
+zinit ice wait'0' lucid
 zinit snippet OMZP::sudo
-zinit snippet OMZP::kubectl
-zinit snippet OMZP::kubectx
+
+zinit ice wait'2' lucid
 zinit snippet OMZP::command-not-found
 
-# Load completions
-autoload -Uz compinit && compinit
+zinit ice wait'3' lucid
+zinit snippet OMZP::kubectl
 
-zinit cdreplay -q
+zinit ice wait'3' lucid
+zinit snippet OMZP::kubectx
+
+# Atuin history
+zinit ice wait'0a' lucid atload'eval "$(atuin init zsh)"'
+zinit light zdharma-continuum/null
+
+# Direnv - deferred
+zinit ice wait'0b' lucid atload'eval "$(direnv hook zsh)"'
+zinit light zdharma-continuum/null
+
+# FZF - deferred
+zinit ice wait'0c' lucid atload'eval "$(fzf --zsh)"'
+zinit light zdharma-continuum/null
+
+# Thefuck - defer 1s (rarely needed immediately)
+zinit ice wait'1' lucid atload'eval $(thefuck --alias); eval $(thefuck --alias fk)'
+zinit light zdharma-continuum/null
 
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
@@ -57,9 +105,6 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-
-# -----------------------FZF config-----------------------------
-eval "$(fzf --zsh)"
 
 # --- setup fzf theme ---
 fg="#CBE0F0"
@@ -97,43 +142,29 @@ fi
 
 # ----- Abbr Expansion -------
 ABBR_SET_EXPANSION_CURSOR=1
-
-if [ -f ~/.config/zsh/.abbrs ]; then
-    source ~/.config/zsh/.abbrs 
-fi
+function load_expansions() {
+    if [ -f ~/.config/zsh/.abbrs ]; then
+        source ~/.config/zsh/.abbrs 
+    fi
+}
 
 # ---- Local config
 if [ -f ~/.config/zsh/.local ]; then
     source ~/.config/zsh/.local 
 fi
 
-# kubectl completions
-source <(kubectl completion zsh)
-# buf completions
-source <(buf completion zsh)
-
 # ------ Aliases --------
 alias v="nvim"
 alias zshconfig="v ~/.zshrc"
 alias zshrestart="source ~/.zshrc"
 
-eval $(thefuck --alias)
-eval $(thefuck --alias fk)
-
 # ------ Other exports --------
 export PATH="$PATH:$(go env GOPATH)/bin"
 export PATH=$PATH:$GOPATH/bin
 export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$(brew --prefix)/opt/libpq/bin"
-export PATH="$PATH:$HOME/.zig"
-
-# Start starship shell
-eval "$(starship init zsh)"
-
-. "$HOME/.atuin/bin/env"
-
-eval "$(atuin init zsh)"
 
 . "$HOME/.clio/bin/env"
 
-eval "$(direnv hook zsh)"
+# Start starship shell 
+eval "$(starship init zsh)"
+# zprof

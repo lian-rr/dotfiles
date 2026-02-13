@@ -1,7 +1,28 @@
-# -----
-abbr add --force --quiet wd="cd /Users/lianrodriguez/Documents/Projects"
+# ============================================
+# Function to cache and load shell completions
+# example usage: cache_completion "kubectl" "kubectl completion zsh" "2"
+# ============================================
+function cache_completion() {
+    local name=$1
+    local cmd=$2
+    local wait=${3:-2}  # Default to wait'2' if not specified
+    
+    local cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/completions"
+    local cache_file="$cache_dir/_${name}"
+    
+    # Create cache directory if it doesn't exist
+    [[ ! -d "$cache_dir" ]] && mkdir -p "$cache_dir"
+    
+    # Generate cache file if it doesn't exist or is empty
+    if [[ ! -f "$cache_file" ]] || [[ ! -s "$cache_file" ]]; then
+        eval "$cmd" > "$cache_file" 2>/dev/null
+    fi
+    
+    # Load the cached completion with zinit
+    zinit ice wait"$wait" lucid
+    zinit snippet "$cache_file"
+}
 
-abbr add --force --quiet idf="idf.py"
 
 # -- aliases
 alias idfconf=". /Users/lianrodriguez/Documents/Projects/others/esp-idf/export.sh"
